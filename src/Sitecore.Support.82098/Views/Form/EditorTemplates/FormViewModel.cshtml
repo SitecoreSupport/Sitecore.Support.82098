@@ -6,6 +6,7 @@
 @using Sitecore.Forms.Mvc
 @using Sitecore.Forms.Mvc.Html
 @using Sitecore.Globalization
+@using Sitecore.Mvc
 @model Sitecore.Forms.Mvc.ViewModels.FormViewModel
 
 @{
@@ -54,12 +55,14 @@
     if (Model.Errors.Any())
     {
         @Html.BootstrapWarningsList(Model.Errors)
-    }
+  }
 
-    if (Model.ShowInformation)
-    {
-        @Html.BootstrapText("Information")
-    }
+  if (Model.ShowInformation)
+  {
+    @**Modified code*@
+    @Html.Sitecore().Field("Introduction", Model.Item)
+    @**Modified code*@
+  }
 
     <div class="has-error has-feedback">
         @Html.BootstrapValidationSammary(false)
@@ -67,10 +70,12 @@
 
     @Html.EditorFor(x => Model.Sections)
 
-    if (Model.ShowFooter)
-    {
-        @Html.BootstrapText("Footer")
-    }
+  if (Model.ShowFooter)
+  {
+    @**Modified code*@
+    @Html.Sitecore().Field("Footer", Model.Item)
+    @**Modified code*@
+  }
 
     @Html.BootstrapSubmit()
 }
